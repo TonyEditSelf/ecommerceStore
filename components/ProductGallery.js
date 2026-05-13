@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/styles.min.css";
 import ProductVisual from "@/components/ProductVisual";
-import OptimizedImage from "@/components/OptimizedImage";
 import {
   getCategoryFallbackImageUrl,
   getOptimizedImageUrl,
@@ -73,14 +74,24 @@ export default function ProductGallery({ product }) {
       <div className="order-1 min-w-0 md:order-2">
         {activeImage ? (
           <div className="group relative aspect-[4/5] w-full max-w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft">
-            <OptimizedImage
+            <InnerImageZoom
               key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}
               src={detailSrc}
-              alt={activeImage.alt || product.title}
-              usage="detail"
-              fallbackCategory={product.category}
-              sizes="(min-width: 1280px) 550px, (min-width: 1024px) 45vw, 100vw"
-              className="object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+              zoomSrc={detailSrc}
+              zoomType="hover"
+              zoomPreload={false}
+              className="absolute inset-0 block h-full w-full max-w-full"
+              imgAttributes={{
+                loading: "lazy",
+                alt: activeImage.alt || product.title,
+                className:
+                  "block h-full w-full max-w-full object-contain transition-transform duration-700",
+                onError: () => {
+                  setDetailFallbackStage((current) =>
+                    current === "primary" ? "category" : "placeholder",
+                  );
+                },
+              }}
             />
           </div>
         ) : (

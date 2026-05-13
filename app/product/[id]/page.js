@@ -64,9 +64,9 @@ export default async function ProductPage({ params }) {
         productTitle={product.title}
       />
 
-      <div className="grid items-start gap-8 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(280px,340px)] xl:grid-cols-[minmax(0,550px)_minmax(0,1fr)_minmax(280px,340px)]">
+      <div className="grid items-start gap-8 lg:gap-12 lg:grid-cols-[minmax(320px,420px)_minmax(0,1fr)] xl:grid-cols-[minmax(360px,480px)_minmax(0,1fr)]">
         {/* Column 1: Gallery */}
-        <div className="min-w-0 w-full overflow-hidden animate-in fade-in slide-in-from-left-4 duration-700">
+        <div className="min-w-0 w-full max-w-[500px] justify-self-start overflow-hidden animate-in fade-in slide-in-from-left-4 duration-700">
           <ProductGallery product={product} />
         </div>
 
@@ -154,12 +154,11 @@ export default async function ProductPage({ params }) {
               </div>
             ))}
           </div>
-        </section>
 
-        {/* Column 3: Buy Box */}
-        <aside className="min-w-0">
-          <BuyBox product={product} />
-        </aside>
+          <div className="w-full max-w-[420px] pt-2">
+            <BuyBox product={product} />
+          </div>
+        </section>
       </div>
     </div>
   );
