@@ -73,7 +73,10 @@ export default function ProductGallery({ product }) {
 
       <div className="order-1 md:order-2">
         {activeImage ? (
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft group">
+          <div
+            className="relative w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft group"
+            style={{ aspectRatio: "3/4", maxHeight: "min(600px, 75vh)" }}
+          >
             <div className="absolute inset-0 w-full h-full">
               <InnerImageZoom
                 key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}

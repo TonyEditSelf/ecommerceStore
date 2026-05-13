@@ -66,7 +66,7 @@ export default async function ProductPage({ params }) {
 
       <div className="grid gap-8 lg:gap-16 lg:grid-cols-[1fr_1.1fr_340px] xl:grid-cols-[minmax(0,550px)_1fr_340px]">
         {/* Column 1: Gallery */}
-        <div className="min-w-0 overflow-hidden animate-in fade-in slide-in-from-left-4 duration-700">
+        <div className="min-w-0 w-full overflow-hidden animate-in fade-in slide-in-from-left-4 duration-700">
           <ProductGallery product={product} />
         </div>
 
