@@ -79,3 +79,17 @@ select {
   border-radius: 0 0 10px 10px;
   background: #ffffff;
 }
+
+/* Fix InnerImageZoom overflow in production */
+.iiz {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+}
+
+.iiz__img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  max-width: 100% !important;
+}

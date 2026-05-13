@@ -4,7 +4,11 @@ import { useMemo, useState } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/styles.min.css";
 import ProductVisual from "@/components/ProductVisual";
-import { getCategoryFallbackImageUrl, getOptimizedImageUrl, PLACEHOLDER_IMAGE } from "@/lib/images";
+import {
+  getCategoryFallbackImageUrl,
+  getOptimizedImageUrl,
+  PLACEHOLDER_IMAGE,
+} from "@/lib/images";
 
 export default function ProductGallery({ product }) {
   const images = useMemo(
@@ -25,7 +29,9 @@ export default function ProductGallery({ product }) {
           : getCategoryFallbackImageUrl(product.category, "detail");
 
   return (
-    <section className={`grid gap-2 ${images.length > 1 ? "md:grid-cols-[48px_1fr]" : "grid-cols-1"}`}>
+    <section
+      className={`grid gap-2 ${images.length > 1 ? "md:grid-cols-[48px_1fr]" : "grid-cols-1"}`}
+    >
       {images.length > 1 && (
         <div className="order-2 grid grid-cols-3 gap-2 md:order-1 md:grid-cols-1">
           {images.map((image, index) => (
@@ -36,7 +42,9 @@ export default function ProductGallery({ product }) {
                 setDetailFallbackStage("primary");
               }}
               className={`group overflow-hidden rounded-xl border bg-white p-1 transition-all duration-300 ${
-                activeIndex === index ? "border-primary shadow-subtle ring-1 ring-primary/20 scale-105" : "border-borderSoft/40 hover:border-primary/40"
+                activeIndex === index
+                  ? "border-primary shadow-subtle ring-1 ring-primary/20 scale-105"
+                  : "border-borderSoft/40 hover:border-primary/40"
               }`}
               aria-label={`Show product image ${index + 1}`}
             >
@@ -49,7 +57,10 @@ export default function ProductGallery({ product }) {
                   const image = event.currentTarget;
                   if (image.dataset.fallback !== "category") {
                     image.dataset.fallback = "category";
-                    image.src = getCategoryFallbackImageUrl(product.category, "thumbnail");
+                    image.src = getCategoryFallbackImageUrl(
+                      product.category,
+                      "thumbnail",
+                    );
                     return;
                   }
                   image.src = PLACEHOLDER_IMAGE;
@@ -63,21 +74,25 @@ export default function ProductGallery({ product }) {
       <div className="order-1 md:order-2">
         {activeImage ? (
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft group">
-            <InnerImageZoom
-              key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}
-              src={detailSrc}
-              zoomSrc={detailSrc}
-              zoomType="hover"
-              zoomPreload={false}
-              imgAttributes={{
-                loading: "lazy",
-                onError: () => {
-                  setDetailFallbackStage((current) => (current === "primary" ? "category" : "placeholder"));
-                },
-              }}
-              className="h-full w-full"
-              imgClassName="object-contain w-full h-full transition-transform duration-700"
-            />
+            <div className="absolute inset-0 w-full h-full">
+              <InnerImageZoom
+                key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}
+                src={detailSrc}
+                zoomSrc={detailSrc}
+                zoomType="hover"
+                zoomPreload={false}
+                imgAttributes={{
+                  loading: "lazy",
+                  onError: () => {
+                    setDetailFallbackStage((current) =>
+                      current === "primary" ? "category" : "placeholder",
+                    );
+                  },
+                }}
+                className="h-full w-full"
+                imgClassName="object-contain w-full h-full transition-transform duration-700"
+              />
+            </div>
           </div>
         ) : (
           <div className="aspect-[4/5] w-full rounded-3xl border border-borderSoft/50 bg-card p-6 shadow-soft">
