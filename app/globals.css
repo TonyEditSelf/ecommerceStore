@@ -82,12 +82,16 @@ select {
 
 /* Fix InnerImageZoom overflow in production */
 .iiz {
+  display: block !important;
+  min-width: 0 !important;
   width: 100% !important;
   height: 100% !important;
   max-width: 100% !important;
 }
 
 .iiz__img {
+  display: block !important;
+  min-width: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;

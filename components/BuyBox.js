@@ -21,7 +21,7 @@ export default function BuyBox({ product }) {
   }, [product.id, product.title]);
 
   return (
-    <div className="sticky top-24 rounded-3xl border border-borderSoft/50 bg-white p-8 shadow-soft animate-in fade-in slide-in-from-right-4 duration-500">
+    <div className="sticky top-24 w-full min-w-0 max-w-full rounded-3xl border border-borderSoft/50 bg-white p-6 shadow-soft animate-in fade-in slide-in-from-right-4 duration-500 sm:p-8">
       <div className="mb-6">
         <div className="flex items-baseline gap-1">
           <span className="text-[10px] font-bold text-textSecondary uppercase tracking-widest">Price:</span>

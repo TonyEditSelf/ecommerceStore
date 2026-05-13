@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${dmSans.variable} ${instrumentSerif.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${instrumentSerif.variable} font-sans antialiased overflow-x-clip`}
       >
         <Navbar />
         <main className="min-h-screen">{children}</main>

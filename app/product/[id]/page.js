@@ -53,7 +53,7 @@ export default async function ProductPage({ params }) {
   };
 
   return (
-    <div className="mx-auto max-w-screen-2xl w-full overflow-x-hidden px-4 py-8 sm:px-6 lg:px-12">
+    <div className="mx-auto max-w-screen-2xl w-full overflow-x-clip px-4 py-8 sm:px-6 lg:px-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -64,7 +64,7 @@ export default async function ProductPage({ params }) {
         productTitle={product.title}
       />
 
-      <div className="grid gap-8 lg:gap-16 lg:grid-cols-[1fr_1.1fr_340px] xl:grid-cols-[minmax(0,550px)_1fr_340px]">
+      <div className="grid items-start gap-8 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(280px,340px)] xl:grid-cols-[minmax(0,550px)_minmax(0,1fr)_minmax(280px,340px)]">
         {/* Column 1: Gallery */}
         <div className="min-w-0 w-full overflow-hidden animate-in fade-in slide-in-from-left-4 duration-700">
           <ProductGallery product={product} />
@@ -157,7 +157,7 @@ export default async function ProductPage({ params }) {
         </section>
 
         {/* Column 3: Buy Box */}
-        <aside>
+        <aside className="min-w-0">
           <BuyBox product={product} />
         </aside>
       </div>

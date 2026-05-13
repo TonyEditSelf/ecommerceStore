@@ -30,7 +30,7 @@ export default function ProductGallery({ product }) {
 
   return (
     <section
-      className={`grid gap-2 ${images.length > 1 ? "md:grid-cols-[48px_1fr]" : "grid-cols-1"}`}
+      className={`grid min-w-0 gap-2 ${images.length > 1 ? "md:grid-cols-[48px_minmax(0,1fr)]" : "grid-cols-1"}`}
     >
       {images.length > 1 && (
         <div className="order-2 grid grid-cols-3 gap-2 md:order-1 md:grid-cols-1">
@@ -71,31 +71,26 @@ export default function ProductGallery({ product }) {
         </div>
       )}
 
-      <div className="order-1 md:order-2">
+      <div className="order-1 min-w-0 md:order-2">
         {activeImage ? (
-          <div
-            className="relative w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft group"
-            style={{ aspectRatio: "3/4", maxHeight: "min(600px, 75vh)" }}
-          >
-            <div className="absolute inset-0 w-full h-full">
-              <InnerImageZoom
-                key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}
-                src={detailSrc}
-                zoomSrc={detailSrc}
-                zoomType="hover"
-                zoomPreload={false}
-                imgAttributes={{
-                  loading: "lazy",
-                  onError: () => {
-                    setDetailFallbackStage((current) =>
-                      current === "primary" ? "category" : "placeholder",
-                    );
-                  },
-                }}
-                className="h-full w-full"
-                imgClassName="object-contain w-full h-full transition-transform duration-700"
-              />
-            </div>
+          <div className="relative aspect-[4/5] w-full max-w-full overflow-hidden rounded-3xl border border-borderSoft/50 bg-white shadow-soft group">
+            <InnerImageZoom
+              key={`${activeImage.publicId || activeImage.url}-${detailFallbackStage}`}
+              src={detailSrc}
+              zoomSrc={detailSrc}
+              zoomType="hover"
+              zoomPreload={false}
+              imgAttributes={{
+                loading: "lazy",
+                onError: () => {
+                  setDetailFallbackStage((current) =>
+                    current === "primary" ? "category" : "placeholder",
+                  );
+                },
+              }}
+              className="block h-full w-full max-w-full"
+              imgClassName="block h-full w-full max-w-full object-contain transition-transform duration-700"
+            />
           </div>
         ) : (
           <div className="aspect-[4/5] w-full rounded-3xl border border-borderSoft/50 bg-card p-6 shadow-soft">
